@@ -47,12 +47,23 @@
         border: 1px solid #007bff; /* Border color matches hover background */
         max-height: 250px; /* Increased height for more suggestions */
         overflow-y: auto; /* Scroll if there are too many suggestions */
-        position: absolute;
+        position: relative;
+        margin-top: 1rem;
         width: 100%;
-        z-index: 9999;
+        z-index: 0;
         background: #ffffff; /* White background for the dropdown */
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
         border-radius: 4px; /* Rounded corners for a modern look */
+      }
+      .flex{
+        display: flex;
+        
+      }
+      .justify-between{
+        justify-content: space-between;
+      }
+      .justify-center{
+        justify-content: center;
       }
     </style>
   </head>
@@ -98,10 +109,11 @@
               <a class="nav-link" href="/blog">Blog</a>
             </li>
           </ul>
-          <form class="d-flex" role="search">
+          <form class="d-flex" role="search" method="GET" action="https://www.google.com/search" target="_blank">
             <input
               class="form-control me-2"
               type="search"
+              name="q"
               placeholder="Search"
               aria-label="Search"
             />
@@ -125,13 +137,12 @@
       "
     >
       <form action="/predict" method="post">
-        <div class="form-group position-relative">
+        <div class="form-group position-relative flex justify-between">
           <label for="symptoms">Select Symptoms:</label>
           <!-- <input type="text" class="form-control" id="symptoms-search" name="symptoms" placeholder="Type symptoms such as itching, sleeping, aching etc"> -->
 
-          <div id="suggestions-list" class="suggestions-list"></div>
           <!-- Suggestions container -->
-          <select name="symtoms1" id="">
+          <select name="symtoms1" id=""> 
             <option value="itching">itching</option>
 <option value="skin_rash">skin_rash</option>
 <option value="nodal_skin_eruptions">nodal_skin_eruptions</option>
@@ -537,6 +548,8 @@
 
           </select>
         </div>
+        <div id="suggestions-list" class="suggestions-list"></div>
+
         <br />
         <button
           type="button"
@@ -567,7 +580,7 @@
     <!-- Results Section -->
     <h1 class="text-center my-4 mt-4">Our AI System Results</h1>
     <div class="container">
-      <div class="result-container">
+      <div class="result-container flex justify-center">
         <button
           class="toggle-button"
           data-bs-toggle="modal"
